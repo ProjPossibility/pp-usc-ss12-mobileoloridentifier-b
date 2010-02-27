@@ -7,7 +7,7 @@
 //
 
 #import "MobileColorViewController.h"
-
+#import "ColorDictionary.h"
 @implementation MobileColorViewController
 
 
@@ -29,12 +29,15 @@
 */
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	colorDictionary=[[ColorDictionary alloc] init];						//creating the object
+	
+	
 }
-*/
 
 
 /*
@@ -44,6 +47,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+	colorNameLabel.text = [[colorDictionary dictionary] objectForKey:textField.text];		// setting the label to the object returned
+return YES;
+}
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* MobileColorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MobileColorViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MobileColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */; };
+		D928090E1139CE8400450BE7 /* ColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D928090D1139CE8400450BE7 /* ColorDictionary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MobileColor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileColor_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D928090C1139CE8400450BE7 /* ColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorDictionary.h; sourceTree = "<group>"; };
+		D928090D1139CE8400450BE7 /* ColorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorDictionary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +57,8 @@
 				1D3623250D0F684500981E51 /* MobileColorAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* MobileColorViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */,
+				D928090C1139CE8400450BE7 /* ColorDictionary.h */,
+				D928090D1139CE8400450BE7 /* ColorDictionary.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -132,7 +137,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MobileColor" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "mobileColor" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
@@ -164,6 +169,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MobileColorAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* MobileColorViewController.m in Sources */,
+				D928090E1139CE8400450BE7 /* ColorDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +241,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MobileColor" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "mobileColor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

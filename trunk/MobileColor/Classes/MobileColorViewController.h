@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MobileColorViewController : UIViewController {
+@class ColorDictionary;
 
+@interface MobileColorViewController : UIViewController {
+	UILabel *colorNameLabel;
+	ColorDictionary *colorDictionary;
 }
+
+@property (nonatomic, retain) IBOutlet UILabel *colorNameLabel; 
 
 @end
 
