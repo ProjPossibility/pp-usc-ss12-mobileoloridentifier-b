@@ -10,7 +10,7 @@
 #import "ColorDictionary.h"
 @implementation MobileColorViewController
 
-
+@synthesize colorNameLabel;
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
