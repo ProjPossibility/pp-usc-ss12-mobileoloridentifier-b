@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ColorDictionary;
+@class ColorModel;
 
 @interface MobileColorViewController : UIViewController {
 	UILabel *colorNameLabel;
-	ColorDictionary *colorDictionary;
+	ColorModel *colorModel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *colorNameLabel; 

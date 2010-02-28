@@ -7,7 +7,7 @@
 //
 
 #import "MobileColorViewController.h"
-#import "ColorDictionary.h"
+#import "ColorModel.h"
 @implementation MobileColorViewController
 
 @synthesize colorNameLabel;
@@ -34,7 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	colorDictionary=[[ColorDictionary alloc] init];						//creating the object
+	colorModel=[[ColorModel alloc] init];						//creating the object
+	
 	
 	
 }
@@ -49,7 +50,11 @@
 */
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-	colorNameLabel.text = [[colorDictionary dictionary] objectForKey:textField.text];		// setting the label to the object returned
+	// colorNameLabel.text = [[colorModel dictionary] objectForKey:textField.text];		// setting the label to the object returned
+	NSString* tempString=[colorModel nameForColorGivenRed:255 Green:0 Blue:0];
+	colorNameLabel.text = tempString;
+	//-(NSString*)nameForColorGivenRed:(int)r Green:(int)g Blue:(int)b
+	//colorNameLabel.text = returnString;
 	return YES;
 }
 
