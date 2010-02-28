@@ -7,6 +7,8 @@
 //
 
 #import "MobileColorViewController.h"
+CGImageRef UIGetScreenImage(void);
+
 
 @implementation MobileColorViewController
 
@@ -149,8 +151,8 @@
 			NSString *locnMessage = [[NSString alloc]
 									 initWithFormat:@"%f is x %f is y", temp.x, temp.y];
 			messageLabel.text = locnMessage;
-			CGImageRef* img=UIGetScreenImage();
-			UIImage* mainImage=[UIImage imageWithCGImage:img];
+			CGImageRef img=UIGetScreenImage();
+			/*UIImage* mainImage=[UIImage imageWithCGImage:img];
 			
 			CGFloat width   = 300;
 			CGFloat height  = 460;
@@ -165,9 +167,9 @@
 			UIImageView *tempView   = [[UIImageView alloc] initWithImage:newImage];
 			[self.view addSubview:tempView];
 			[tempView release];
+			*/
 			
-			
-			//[self getPixelColorAtLocation:temp ofCGImage:img];
+			[self getPixelColorAtLocation:temp ofCGImage:img];
 			
 		} 
 		//NSLog(@"%f is x %f is y", temp.x, temp.y);	

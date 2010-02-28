@@ -180,7 +180,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MobileColor_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 2.0;
 				PRODUCT_NAME = MobileColor;
+				SDKROOT = iphoneos3.1.3;
 			};
 			name = Debug;
 		};
