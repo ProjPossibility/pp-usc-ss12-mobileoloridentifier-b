@@ -72,7 +72,7 @@ typedef struct {
 	// tool bar - handy if you want to be able to exit from the image picker...
 	UIToolbar *toolBar=[[[UIToolbar alloc] initWithFrame:CGRectMake(0, 480-44, 320, 44)] autorelease];
 	NSArray *items=[NSArray arrayWithObjects:
-					[[[UIBarButtonItem alloc] initWithTitle:@"Albums" style:UIBarButtonItemStylePlain target:self action:@selector(selectExistingPicture)] autorelease],
+					[[[UIBarButtonItem alloc] initWithTitle:@"Albums" style:UIBarButtonItemStyleBordered target:self action:@selector(selectExistingPicture)] autorelease],
 					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace  target:nil action:nil] autorelease],
 					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone  target:self action:@selector(finishedAugmentedReality)] autorelease],
 					nil];
@@ -128,6 +128,13 @@ typedef struct {
 }
 
 - (IBAction)selectExistingPicture {
+	if ([self modalViewController]) {
+		//[self finishedAugmentedReality];
+		[self dismissModalViewControllerAnimated:NO];
+		[processingTimer invalidate];
+		overlayView=nil;
+	}
+	
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
@@ -161,7 +168,9 @@ typedef struct {
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissModalViewControllerAnimated:NO];
+	
+	[self getCameraPicture:nil];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
