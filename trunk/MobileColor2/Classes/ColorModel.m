@@ -6,10 +6,10 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "ColorDictionary.h"
+#import "ColorModel.h"
+#include <math.h>
 
-
-@implementation ColorDictionary
+@implementation ColorModel
 
 -(id) init{
 	if(self = [super init] )
@@ -1584,7 +1584,44 @@
 					 @"White",@"FFFFFF", nil]retain];
 	}
 	
-	//NS
+	
+//to enumerate through the keys and store the R,G,B values from the HEX in three separate NSArrays
+	
+	//for the purpose of conversion from hex to decimal
+	colorNameArray = [[NSMutableArray alloc]init]; 
+	NSEnumerator *enumerator=[dictionary keyEnumerator];
+	id key;
+	
+	NSString *hexDigit;
+	int r,g,b,index=0;
+	
+	//iterating through each key, storing the r,g,b values
+	while((key = [enumerator nextObject])){
+		hexDigit=[key substringWithRange:NSMakeRange(0,2)];
+		r=[self hexToInteger:[hexDigit characterAtIndex:1]]+([self hexToInteger:[hexDigit characterAtIndex:0]]*16);
+		red[index]=r;
+		
+		hexDigit=[key substringWithRange:NSMakeRange(2,2)];
+		g=[self hexToInteger:[hexDigit characterAtIndex:1]]+([self hexToInteger:[hexDigit characterAtIndex:0]]*16);
+		green[index]=g;
+		
+		hexDigit=[key substringWithRange:NSMakeRange(4,2)];
+		b=[self hexToInteger:[hexDigit characterAtIndex:1]]+([self hexToInteger:[hexDigit characterAtIndex:0]]*16);
+		blue[index]=b;
+		
+		//[colorNameArray addObject: [dictionary objectForKey:key]];
+		//colorNameArray[index]=(NSString*)[dictionary objectForKey:key];
+		[colorNameArray insertObject: [dictionary objectForKey:key] atIndex:index];
+		NSString* tempString=[colorNameArray objectAtIndex:index];
+		
+		
+		if(index==1565){
+			NSLog(@"Value of object is %@",[dictionary objectForKey:key]);
+			NSLog(@"color name HERE is %@",tempString);
+		}
+		
+		index++;
+	}
 	return self;	
 }
 
@@ -1592,9 +1629,78 @@
 	return dictionary;
 }
 
--(NSString*)nameForColorGivenRed:(int)r green:(int)g blue:(int)b{
+-(int)hexToInteger:(char)c{
+	if(c>='A')
+		return (c-'A')+10;
+	else
+		return (c-'0');
+}
 
+-(char)IntegerToHex:(int)i{
+	if(i>=10)
+		return (i+55);
+	else
+		return (i+48);
+}
+
+
+
+-(id)nameForColorGivenRed:(int)r Green:(int)g Blue:(int)b{
+	// hardcoding r, g, b
+	//r = 1;
+	//g = 75;
+	//b = 66;
+	// remove hardcoding
 	
+	int distance = 195075;
+	int closest = 0;
+	int index,sum,p1,p2,p3;
+	for (index=0; index<NUMCOLORS; index++) {
+		p1 = pow((r - red[index]),2);
+		p2 = pow((g - green[index]),2);
+		p3 = pow((b - blue[index]),2);
+		sum = p1+p2+p3;
+		
+		if(sum < distance){
+			distance = sum;
+			closest = index;
+			//NSLog(@"Closest distance value is %d and p1,p2,p3 is %d,%d,%d",distance,p1,p2,p3);
+		}
+	}
+	//NSLog(@"Closest value is %d and index is %d",closest,index);
+	//NSLog(@"Values of r,g,b are %d,%d,%d",red[closest],green[closest],blue[closest]);
+	
+		//Making the hexValue as a mutable String
+	NSMutableString *hexValue = [NSMutableString stringWithCapacity:6]; 
+	[hexValue appendFormat:@"%c",[self IntegerToHex:red[closest]/16]];
+	[hexValue appendFormat:@"%c",[self IntegerToHex:red[closest]%16]];
+	[hexValue appendFormat:@"%c",[self IntegerToHex:green[closest]/16]];
+	[hexValue appendFormat:@"%c",[self IntegerToHex:green[closest]%16]];
+	[hexValue appendFormat:@"%c",[self IntegerToHex:blue[closest]/16]];
+	[hexValue appendFormat:@"%c",[self IntegerToHex:blue[closest]%16]];
+		//
+	//NSLog(@"Value of hex is %@",hexValue);
+	
+	NSEnumerator *enumerator=[dictionary keyEnumerator];
+	id key;
+	
+	while((key = [enumerator nextObject])){
+	
+		if([key isEqualToString:hexValue]){
+			//NSLog(@"Key value is %@",key);
+			//NSLog(@"Value of object is %@",[dictionary objectForKey:key]);
+			return [dictionary objectForKey:key];
+			break;
+		}
+	}
+	//NSLog(@"Reached here");
+	
+	//return @"Hello";
+	/*NSLog(@"distance is %d",distance);
+	
+	NSLog(@"value of closest index is %d, whose r,g,b are %d,%d,%d",closest,red[closest],green[closest],blue[closest]);
+	NSLog(@"color name is %@",[colorNameArray objectAtIndex:1565]);
+	return [[colorNameArray objectAtIndex:index] description];*/
 }
 
 

@@ -7,6 +7,8 @@
 //
 
 #import "MobileColorViewController.h"
+#import "OverlayView.h"
+#import "ColorModel.h"
 
 @implementation MobileColorViewController
 
@@ -41,16 +43,50 @@ typedef struct {
     [super dealloc];
 }
 #pragma mark -
-- (IBAction)getCameraPicture:(id)sender {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsImageEditing = YES;
-    picker.sourceType = (sender == takePictureButton) ? UIImagePickerControllerSourceTypeCamera :UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    [self presentModalViewController:picker animated:YES];
-	processingTimer=[NSTimer scheduledTimerWithTimeInterval:1/5.0f target:self selector:@selector(processImage) userInfo:nil repeats:YES];
-    [picker release];
-    
+
+-(void) finishedAugmentedReality {
+	[self dismissModalViewControllerAnimated:YES];
+	[processingTimer invalidate];
+	overlayView=nil;
 }
+
+- (IBAction)getCameraPicture:(id)sender {
+	// set up our camera overlay view
+	
+	// tool bar - handy if you want to be able to exit from the image picker...
+	UIToolbar *toolBar=[[[UIToolbar alloc] initWithFrame:CGRectMake(0, 480-44, 320, 44)] autorelease];
+	NSArray *items=[NSArray arrayWithObjects:
+					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace  target:nil action:nil] autorelease],
+					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone  target:self action:@selector(finishedAugmentedReality)] autorelease],
+					nil];
+	[toolBar setItems:items];
+	
+	// parent view for our overlay
+	UIView *parentView=[[[UIView alloc] initWithFrame:CGRectMake(0,0,320, 480)] autorelease];
+	[parentView addSubview:overlayView];
+	[parentView addSubview:toolBar];
+	
+	// configure the image picker with our overlay view
+	UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+	picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	
+//	picker.delegate = self;
+//    picker.allowsImageEditing = YES;
+//    picker.sourceType = (sender == takePictureButton) ? UIImagePickerControllerSourceTypeCamera :UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+	
+	UIImagePickerControllerSourceTypePhotoLibrary;
+	// hide the camera controls
+	picker.showsCameraControls=NO;
+	picker.delegate = nil;
+	picker.allowsImageEditing = NO;
+	// and put our overlay view in
+	picker.cameraOverlayView=parentView;
+	[self presentModalViewController:picker animated:YES];		
+	[picker release];
+	// start our processing timer
+	processingTimer=[NSTimer scheduledTimerWithTimeInterval:1/5.0f target:self selector:@selector(processImage) userInfo:nil repeats:YES];
+}
+
 - (IBAction)selectExistingPicture {
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -90,6 +126,14 @@ typedef struct {
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	colorModel = [[ColorModel alloc] init];
+	
+	// create the overlay view
+	overlayView=[[OverlayView alloc] initWithFrame:CGRectMake(0, 0, 320, 480-44)]; // autorelease];
+	// important - it needs to be transparent so the camera preview shows through!
+	overlayView.opaque=NO;
+	overlayView.backgroundColor=[UIColor clearColor];
 	
 	if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
         takePictureButton.hidden = YES;
@@ -149,29 +193,34 @@ typedef struct {
 			UITouch *touch = [touches anyObject];
 			
 			temp = [touch locationInView:self.view];
-			NSString *locnMessage = [[NSString alloc]
-									 initWithFormat:@"%f is x %f is y", temp.x, temp.y];
-			messageLabel.text = locnMessage;
-			
+//			NSString *locnMessage = [[NSString alloc]
+//									 initWithFormat:@"%f is x %f is y", temp.x, temp.y];
+//			messageLabel.text = locnMessage;
+//			
 			CGRect screenRect = [[UIScreen mainScreen] bounds];
 			UIGraphicsBeginImageContext(screenRect.size);
 			[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
 			UIImage *sShot = UIGraphicsGetImageFromCurrentImageContext();
 			CGImageRef sShotCG = sShot.CGImage;
+			UIGraphicsEndImageContext();
 			
-			UIGraphicsBeginImageContext(CGSizeMake(200, 100));
-			//UIGraphicsPushContext(sShot);	
-			UIImage *updatedImg = [self addText:sShot text:locnMessage temp:temp];
+//			UIGraphicsBeginImageContext(CGSizeMake(200, 100));
+//			//UIGraphicsPushContext(sShot);	
+//			UIImage *updatedImg = [self addText:sShot text:locnMessage temp:temp];
+//			
+//			UIImageView *iView = [[UIImageView alloc] initWithImage:updatedImg]; 
+//			[self.view addSubview:iView];
+//			
+//			[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//			//UIImageWriteToSavedPhotosAlbum(updatedImg, nil, nil, nil);
 			
-			UIImageView *iView = [[UIImageView alloc] initWithImage:updatedImg]; 
-			[self.view addSubview:iView];
-			
-			[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-			//UIImageWriteToSavedPhotosAlbum(updatedImg, nil, nil, nil);
+			if (!overlayView.superview) {
+				[self.view addSubview:overlayView];
+			}
 			
 			[self getPixelColorAtLocation:temp ofCGImage:sShotCG];
 			
-			UIGraphicsEndImageContext();
+//			UIGraphicsEndImageContext();
 
 			
 		} 
@@ -226,16 +275,19 @@ CGImageRef UIGetScreenImage();
 	// grab the screen
 	CGImageRef screenCGImage=UIGetScreenImage();
 	CGPoint pointCamera;
-	pointCamera.x = 240;
-	pointCamera.y = 160;
+	pointCamera.x = 160;
+	pointCamera.y = 240;
 	NSString *locnMessage = [[NSString alloc]
 							 initWithFormat:@"%f is x %f is y", pointCamera.x, pointCamera.y];
 	// turn it into something we can use
+	//UIColor *color = 
 	[self getPixelColorAtLocation:pointCamera ofCGImage:screenCGImage];
-	UIImage *updatedImg = [self addText:[UIImage imageWithCGImage:screenCGImage] text:locnMessage temp:temp];
+//	UIImage *updatedImg = [self addText:[UIImage imageWithCGImage:screenCGImage] text:locnMessage temp:temp];
+//	
+//	UIImageView *iView = [[UIImageView alloc] initWithImage:updatedImg]; 
+//	[self.view addSubview:iView];
 	
-	UIImageView *iView = [[UIImageView alloc] initWithImage:updatedImg]; 
-	[self.view addSubview:iView];
+	
 	
 	
 	//destroyImage(screenCGImage);
@@ -271,6 +323,8 @@ CGImageRef UIGetScreenImage();
 		int blue = data[offset+3];
 		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
 		color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
+		[overlayView showText:[colorModel nameForColorGivenRed:red Green:green Blue:blue]]; //[NSString stringWithFormat:@"RGB %i %i %i",red,green,blue]];
+		NSLog(@"%@", [NSString stringWithFormat:@"%@", color]);
 	}
 	
 	// When finished, release the context

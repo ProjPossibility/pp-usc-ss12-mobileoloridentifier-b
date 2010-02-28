@@ -9,6 +9,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class OverlayView;
+@class ColorModel;
+
 @interface MobileColorViewController : UIViewController 
 <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImageView *imageView;
@@ -19,8 +22,8 @@
     UILabel    *touchesLabel; 
 	NSTimer *processingTimer;
 	CGPoint temp;
-	
-	
+	OverlayView *overlayView;
+	ColorModel *colorModel;
 }
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UIButton *takePictureButton;

@@ -16,6 +16,6 @@
 
 -(NSDictionary *)dictionary;					//declaring a method
 
--(NSString *)nameForColorGivenRed:(int)r green:(int)g blue:(int)b;	//declaring the method to calculate the closest color value
-
+-(NSString *)nameForColorWithRed:(int)r green:(int)g blue:(int)b;	//declaring the method to calculate the closest color value
+//nameForColorWithRed:green:blue:
 @end

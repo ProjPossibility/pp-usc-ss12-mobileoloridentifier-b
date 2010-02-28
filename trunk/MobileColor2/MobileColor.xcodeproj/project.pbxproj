@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* MobileColorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MobileColorViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MobileColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */; };
+		692F218B113B1F95008286C5 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 692F218A113B1F95008286C5 /* OverlayView.m */; };
+		692F21AC113B2352008286C5 /* ColorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 692F21AB113B2352008286C5 /* ColorModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,10 @@
 		28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileColorViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MobileColor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileColor_Prefix.pch; sourceTree = "<group>"; };
+		692F2189113B1F95008286C5 /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
+		692F218A113B1F95008286C5 /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
+		692F21AA113B2352008286C5 /* ColorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorModel.h; sourceTree = "<group>"; };
+		692F21AB113B2352008286C5 /* ColorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorModel.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +60,10 @@
 				1D3623250D0F684500981E51 /* MobileColorAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* MobileColorViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */,
+				692F2189113B1F95008286C5 /* OverlayView.h */,
+				692F218A113B1F95008286C5 /* OverlayView.m */,
+				692F21AA113B2352008286C5 /* ColorModel.h */,
+				692F21AB113B2352008286C5 /* ColorModel.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -164,6 +174,8 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MobileColorAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* MobileColorViewController.m in Sources */,
+				692F218B113B1F95008286C5 /* OverlayView.m in Sources */,
+				692F21AC113B2352008286C5 /* ColorModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
