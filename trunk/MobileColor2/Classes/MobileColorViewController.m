@@ -53,9 +53,26 @@ typedef struct {
 - (IBAction)getCameraPicture:(id)sender {
 	// set up our camera overlay view
 	
+	if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+		[self selectExistingPicture];
+		return;
+//        takePictureButton.hidden = YES;
+//        selectFromCameraRollButton.hidden = YES;
+    }
+	
+	NSLog(@"getCameraPicture:");
+	
+//	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//	button.frame = CGRectMake(20,400,280,50);
+//	[button setTitle:@"Tap here" forState:UIControlStateNormal];
+//	[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//	[button addTarget:self action:@selector(selectExistingPicture) forControlEvents:UIControlEventTouchUpInside];
+//	[self.view addSubview:button];
+	
 	// tool bar - handy if you want to be able to exit from the image picker...
 	UIToolbar *toolBar=[[[UIToolbar alloc] initWithFrame:CGRectMake(0, 480-44, 320, 44)] autorelease];
 	NSArray *items=[NSArray arrayWithObjects:
+					[[[UIBarButtonItem alloc] initWithTitle:@"Albums" style:UIBarButtonItemStylePlain target:self action:@selector(selectExistingPicture)] autorelease],
 					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace  target:nil action:nil] autorelease],
 					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone  target:self action:@selector(finishedAugmentedReality)] autorelease],
 					nil];
@@ -76,9 +93,32 @@ typedef struct {
 	
 	UIImagePickerControllerSourceTypePhotoLibrary;
 	// hide the camera controls
-	picker.showsCameraControls=NO;
+	//picker.showsCameraControls=NO;
 	picker.delegate = nil;
-	picker.allowsImageEditing = NO;
+	//picker.allowsImageEditing = NO;
+	picker.allowsEditing = NO;
+	
+	//transform values for full screen support
+#define CAMERA_TRANSFORM_X 1
+#define CAMERA_TRANSFORM_Y 1.12412
+	//iphone screen dimensions
+//#define SCREEN_WIDTH  320
+//#define SCREEN_HEIGTH 480
+	
+	//hide all controls
+	picker.showsCameraControls = NO;
+	picker.navigationBarHidden = YES;
+	picker.toolbarHidden = YES;
+	//make the video preview full size
+	picker.wantsFullScreenLayout = YES;
+//	picker.cameraViewTransform =
+//	CGAffineTransformScale(picker.cameraViewTransform,
+//						   CAMERA_TRANSFORM_X,
+//						   CAMERA_TRANSFORM_Y);
+	picker.cameraViewTransform=
+	CGAffineTransformScale(picker.cameraViewTransform, 1.0, 1.13); 
+	
+	
 	// and put our overlay view in
 	picker.cameraOverlayView=parentView;
 	[self presentModalViewController:picker animated:YES];		
@@ -91,7 +131,8 @@ typedef struct {
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        picker.allowsImageEditing = YES;
+        //picker.allowsImageEditing = YES;
+		picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentModalViewController:picker animated:YES];
         [picker release];
@@ -135,17 +176,9 @@ typedef struct {
 	overlayView.opaque=NO;
 	overlayView.backgroundColor=[UIColor clearColor];
 	
-	if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-        takePictureButton.hidden = YES;
-        selectFromCameraRollButton.hidden = YES;
-    }
-	
-	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	button.frame = CGRectMake(20,400,280,50);
-	[button setTitle:@"Tap here" forState:UIControlStateNormal];
-	[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[button addTarget:self action:@selector(selectExistingPicture) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:button];
+	// start camera
+	[self performSelector:@selector(getCameraPicture:) withObject:nil afterDelay:0.0f];
+	//[self getCameraPicture:nil];
 	
 	
 	
@@ -199,7 +232,7 @@ typedef struct {
 //			
 			CGRect screenRect = [[UIScreen mainScreen] bounds];
 			UIGraphicsBeginImageContext(screenRect.size);
-			[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+			[(CALayer *)self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
 			UIImage *sShot = UIGraphicsGetImageFromCurrentImageContext();
 			CGImageRef sShotCG = sShot.CGImage;
 			UIGraphicsEndImageContext();
@@ -289,7 +322,7 @@ CGImageRef UIGetScreenImage();
 	
 	
 	
-	
+	CGImageRelease(screenCGImage);
 	//destroyImage(screenCGImage);
 }
 
