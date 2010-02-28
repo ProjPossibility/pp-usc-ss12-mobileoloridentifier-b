@@ -52,7 +52,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	// colorNameLabel.text = [[colorModel dictionary] objectForKey:textField.text];		// setting the label to the object returned
 	//NSString* tempString=[colorModel nameForColorGivenRed:255 Green:0 Blue:0];
-	colorNameLabel.text = [colorModel nameForColorGivenRed:0 Green:149 Blue:183];
+	colorNameLabel.text = [colorModel nameForColorGivenRed:0 Green:71 Blue:22];
 	
 	//colorNameLabel.text=(char)'F'-i;
 	

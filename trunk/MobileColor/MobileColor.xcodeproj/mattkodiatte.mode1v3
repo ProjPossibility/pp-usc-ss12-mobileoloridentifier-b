@@ -197,49 +197,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>D928093B1139E10700450BE7</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>MobileColorViewController.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>D928093C1139E10700450BE7</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>MobileColorViewController.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>D91F2D0A113B0C4D004D118C</string>
-						<key>history</key>
-						<array>
-							<string>D92809511139E27000450BE7</string>
-							<string>D91F2BDE113AF290004D118C</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1268, 618}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>12 119 1268 659 0 0 1280 778 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -313,7 +271,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>7</integer>
+									<integer>5</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -356,7 +314,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ColorModel.m</string>
+								<string>MobileColorViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -364,21 +322,21 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ColorModel.m</string>
+										<string>MobileColorViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D91F2D09113B0C4D004D118C</string>
+										<string>D91F2D2A113B1582004D118C</string>
 										<key>history</key>
 										<array>
 											<string>D92809321139E10700450BE7</string>
 											<string>D92809331139E10700450BE7</string>
 											<string>D9253D32113A02CE0002B91D</string>
 											<string>D9253E1D113A63180002B91D</string>
-											<string>D91F2BFE113AF696004D118C</string>
 											<string>D91F2C20113AF998004D118C</string>
-											<string>D91F2CC0113B00C5004D118C</string>
-											<string>D91F2CB9113B005A004D118C</string>
+											<string>D91F2D1F113B1537004D118C</string>
+											<string>D91F2D28113B1582004D118C</string>
+											<string>D91F2D29113B1582004D118C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -576,10 +534,9 @@
 	<array>
 		<string>D91F2BE1113AF290004D118C</string>
 		<string>D91F2BD7113AF21D004D118C</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>D91B4E731139C76000AEBB4B</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>D928093B1139E10700450BE7</string>
 		<string>/Users/mattkodiatte/Desktop/pp-usc-ss12-mobileoloridentifier-b/trunk/MobileColor/mobileColor.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -962,7 +919,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
