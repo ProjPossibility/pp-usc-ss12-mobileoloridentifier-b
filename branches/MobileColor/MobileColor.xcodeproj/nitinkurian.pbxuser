@@ -1,0 +1,234 @@
+// !$*UTF8*$!
+{
+	1D3623240D0F684500981E51 /* MobileColorAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1007, 441}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 507}";
+		};
+	};
+	1D3623250D0F684500981E51 /* MobileColorAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {957, 464}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 642}";
+		};
+	};
+	1D6058900D05DD3D006BFB54 /* MobileColor */ = {
+		activeExec = 0;
+		executables = (
+			316192371139B7F7001CA914 /* MobileColor */,
+		);
+	};
+	28D7ACF60DDB3853001CB0EB /* MobileColorViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {957, 455}}";
+			sepNavSelRange = "{513, 0}";
+			sepNavVisRange = "{0, 1043}";
+		};
+	};
+	28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {833, 3939}}";
+			sepNavSelRange = "{5212, 0}";
+			sepNavVisRange = "{4761, 818}";
+			sepNavWindowFrame = "{{19, 0}, {1133, 778}}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 316192371139B7F7001CA914 /* MobileColor */;
+		activeSDKPreference = iphonesimulator3.0;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* MobileColor */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* MobileColor */,
+		);
+		breakpoints = (
+			3161945C113A2220001CA914 /* MobileColorViewController.m:175 */,
+		);
+		codeSenseManager = 316192421139B816001CA914 /* Code sense */;
+		executables = (
+			316192371139B7F7001CA914 /* MobileColor */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					779,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 288995319;
+			PBXWorkspaceStateSaveDate = 288995319;
+		};
+		perUserProjectItems = {
+			316192641139D19B001CA914 /* PBXTextBookmark */ = 316192641139D19B001CA914 /* PBXTextBookmark */;
+			3161929D1139D541001CA914 /* PBXTextBookmark */ = 3161929D1139D541001CA914 /* PBXTextBookmark */;
+			316193001139E6B2001CA914 /* PBXTextBookmark */ = 316193001139E6B2001CA914 /* PBXTextBookmark */;
+			3161930C1139E898001CA914 /* PBXTextBookmark */ = 3161930C1139E898001CA914 /* PBXTextBookmark */;
+			31619468113A23D1001CA914 /* PBXTextBookmark */ = 31619468113A23D1001CA914 /* PBXTextBookmark */;
+			31619469113A23D1001CA914 /* PBXTextBookmark */ = 31619469113A23D1001CA914 /* PBXTextBookmark */;
+			31619477113A24CD001CA914 /* PBXTextBookmark */ = 31619477113A24CD001CA914 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 316192411139B816001CA914 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	316192371139B7F7001CA914 /* MobileColor */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = MobileColor;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	316192411139B816001CA914 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	316192421139B816001CA914 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	316192641139D19B001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 32CA4F630368D1EE00C91783 /* MobileColor_Prefix.pch */;
+		name = "MobileColor_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 191;
+		vrLoc = 0;
+	};
+	3161929D1139D541001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* MobileColorAppDelegate.h */;
+		name = "MobileColorAppDelegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 507;
+		vrLoc = 0;
+	};
+	316193001139E6B2001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MobileColorAppDelegate.m */;
+		name = "MobileColorAppDelegate.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 642;
+		vrLoc = 0;
+	};
+	3161930C1139E898001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3161930D1139E898001CA914 /* CGGeometry.h */;
+		name = "CGGeometry.h: 270";
+		rLen = 64;
+		rLoc = 8510;
+		rType = 0;
+		vrLen = 950;
+		vrLoc = 7947;
+	};
+	3161930D1139E898001CA914 /* CGGeometry.h */ = {
+		isa = PBXFileReference;
+		name = CGGeometry.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h;
+		sourceTree = "<absolute>";
+	};
+	3161945C113A2220001CA914 /* MobileColorViewController.m:175 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */;
+		functionName = "-touchesEnded:withEvent:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 175;
+		modificationTime = 289022501.574609;
+		originalNumberOfMultipleMatches = 0;
+		state = 2;
+	};
+	31619468113A23D1001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* MobileColorViewController.h */;
+		name = "MobileColorViewController.h: 20";
+		rLen = 0;
+		rLoc = 513;
+		rType = 0;
+		vrLen = 1043;
+		vrLoc = 0;
+	};
+	31619469113A23D1001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */;
+		name = "MobileColorViewController.m: 161";
+		rLen = 0;
+		rLoc = 5222;
+		rType = 0;
+		vrLen = 1085;
+		vrLoc = 5030;
+	};
+	31619477113A24CD001CA914 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* MobileColorViewController.m */;
+		name = "MobileColorViewController.m: 161";
+		rLen = 0;
+		rLoc = 5225;
+		rType = 0;
+		vrLen = 1104;
+		vrLoc = 4600;
+	};
+	32CA4F630368D1EE00C91783 /* MobileColor_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1007, 464}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 191}";
+		};
+	};
+}
