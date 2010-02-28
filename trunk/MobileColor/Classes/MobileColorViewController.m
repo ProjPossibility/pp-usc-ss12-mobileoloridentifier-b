@@ -50,7 +50,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	colorNameLabel.text = [[colorDictionary dictionary] objectForKey:textField.text];		// setting the label to the object returned
-return YES;
+	return YES;
 }
 
 

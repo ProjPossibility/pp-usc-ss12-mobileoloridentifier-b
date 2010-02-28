@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D9253CEC1139E5030002B91D</string>
+						<string>D9253D38113A02CE0002B91D</string>
 						<key>history</key>
 						<array>
 							<string>D92809611139E47D00450BE7</string>
@@ -256,7 +256,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D9253CED1139E5030002B91D</string>
+						<string>D9253D39113A02CE0002B91D</string>
 						<key>history</key>
 						<array>
 							<string>D92809511139E27000450BE7</string>
@@ -311,6 +311,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -353,7 +355,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
+									<integer>6</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -389,14 +391,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MobileColorViewController.m</string>
+								<string>ColorDictionary.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -404,21 +404,21 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MobileColorViewController.m</string>
+										<string>ColorDictionary.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D9253CEB1139E5030002B91D</string>
+										<string>D9253D37113A02CE0002B91D</string>
 										<key>history</key>
 										<array>
 											<string>D92809321139E10700450BE7</string>
 											<string>D92809331139E10700450BE7</string>
-											<string>D92809341139E10700450BE7</string>
-											<string>D92809371139E10700450BE7</string>
-											<string>D9253CE71139E5030002B91D</string>
-											<string>D9253CE81139E5030002B91D</string>
-											<string>D9253CE91139E5030002B91D</string>
-											<string>D9253CEA1139E5030002B91D</string>
+											<string>D9253D31113A02CE0002B91D</string>
+											<string>D9253D32113A02CE0002B91D</string>
+											<string>D9253D33113A02CE0002B91D</string>
+											<string>D9253D34113A02CE0002B91D</string>
+											<string>D9253D35113A02CE0002B91D</string>
+											<string>D9253D36113A02CE0002B91D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -614,6 +614,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>D9253D3A113A02CE0002B91D</string>
+		<string>D9253D3B113A02CE0002B91D</string>
+		<string>D9253D3C113A02CE0002B91D</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>D91B4E731139C76000AEBB4B</string>
@@ -952,6 +955,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
