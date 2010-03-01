@@ -151,7 +151,7 @@ CGImageRef UIGetScreenImage(void);
 			NSString *locnMessage = [[NSString alloc]
 									 initWithFormat:@"%f is x %f is y", temp.x, temp.y];
 			messageLabel.text = locnMessage;
-			CGImageRef img=UIGetScreenImage();
+			//CGImageRef img=UIGetScreenImage();
 			/*UIImage* mainImage=[UIImage imageWithCGImage:img];
 			
 			CGFloat width   = 300;
@@ -169,7 +169,7 @@ CGImageRef UIGetScreenImage(void);
 			[tempView release];
 			*/
 			
-			[self getPixelColorAtLocation:temp ofCGImage:img];
+			[self getPixelColorAtLocation:temp];// ofCGImage:img];
 			
 		} 
 		//NSLog(@"%f is x %f is y", temp.x, temp.y);	
@@ -186,29 +186,42 @@ CGImageRef UIGetScreenImage(void);
     
 }
 
-
-- (UIColor*) getPixelColorAtLocation:(CGPoint)point ofCGImage:(CGImageRef)inImage {
-	UIColor* color = nil;
-	//CGImageRef inImage = self.image.CGImage;
-	// Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
-	CGContextRef cgctx = [self createARGBBitmapContextFromImage:inImage];
-	if (cgctx == NULL) { return nil; /* error */ }
+- (UIColor*) getPixelColorAtLocation:(CGPoint)point {
 	
-    size_t w = CGImageGetWidth(inImage);
-	size_t h = CGImageGetHeight(inImage);
-	CGRect rect = {{0,0},{w,h}}; 
+	UIColor* color;
+	CGImageRef inImage;
+	CGContextRef cgctx;
+	size_t w;
+	size_t h;
+	CGRect rect;
+	unsigned char* data;
 	
-	// Draw the image to the bitmap context. Once we draw, the memory
-	// allocated for the context for rendering will then contain the
-	// raw image data in the specified color space.
-	CGContextDrawImage(cgctx, rect, inImage); 
+	if (cgctx == NULL || data == NULL) {
+		// Initialize cgctx and data
+		inImage = UIGetScreenImage();//[UIImage imageNamed:@"ColorSpectrumPrivate.png"].CGImage; // Consider using CGImageRetain()
+		
+		// Create off-screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpha, Red, Green, Blue
+		cgctx = [self createARGBBitmapContextFromImage:inImage];
+		if (cgctx == NULL) { return nil; /* error */ }
+		
+		w = CGImageGetWidth(inImage);
+		h = CGImageGetHeight(inImage);
+		//rect = {{0,0},{w,h}};
+		rect = CGRectMake(0, 0, w, h);
+		
+		// Draw the image to the bitmap context. Once we draw, the memory
+		// allocated for the context for rendering will then contain the
+		// raw image data in the specified color space.
+		CGContextDrawImage(cgctx, rect, inImage);
+		
+		// Now we can get a pointer to the image data associated with the bitmap
+		// context.
+		data = CGBitmapContextGetData (cgctx);
+	}
 	
-	// Now we can get a pointer to the image data associated with the bitmap
-	// context.
-	unsigned char* data = CGBitmapContextGetData (cgctx);
 	if (data != NULL) {
-		//offset locates the pixel in the data from x,y.
-		//4 for 4 bytes of data per pixel, w is width of one row of data.
+		// offset locates the pixel in the data from x,y.
+		// 4 for 4 bytes of data per pixel, w is width of one row of data.
 		int offset = 4*((w*round(point.y))+round(point.x));
 		int alpha =  data[offset];
 		int red = data[offset+1];
@@ -217,11 +230,6 @@ CGImageRef UIGetScreenImage(void);
 		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
 		color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
 	}
-	
-	// When finished, release the context
-	CGContextRelease(cgctx);
-	// Free image data memory for the context
-	if (data) { free(data); }
 	
 	return color;
 }
@@ -245,7 +253,7 @@ CGImageRef UIGetScreenImage(void);
 	bitmapByteCount     = (bitmapBytesPerRow * pixelsHigh);
 	
 	// Use the generic RGB color space.
-	colorSpace = CGColorSpaceCreateDeviceRGB();
+	colorSpace = CGColorSpaceCreateDeviceRGB();//CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 	if (colorSpace == NULL)
 	{
 		fprintf(stderr, "Error allocating color space\n");
@@ -255,15 +263,15 @@ CGImageRef UIGetScreenImage(void);
 	// Allocate memory for image data. This is the destination in memory
 	// where any drawing to the bitmap context will be rendered.
 	bitmapData = malloc( bitmapByteCount );
-	if (bitmapData == NULL)
+	if (bitmapData == NULL) 
 	{
 		fprintf (stderr, "Memory not allocated!");
 		CGColorSpaceRelease( colorSpace );
 		return NULL;
 	}
 	
-	// Create the bitmap context. We want pre-multiplied ARGB, 8-bits
-	// per component. Regardless of what the source image format is
+	// Create the bitmap context. We want pre-multiplied ARGB, 8-bits 
+	// per component. Regardless of what the source image format is 
 	// (CMYK, Grayscale, and so on) it will be converted over to the format
 	// specified here by CGBitmapContextCreate.
 	context = CGBitmapContextCreate (bitmapData,
@@ -284,6 +292,7 @@ CGImageRef UIGetScreenImage(void);
 	
 	return context;
 }
+
 /*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     messageLabel.text = @"Touches Began";

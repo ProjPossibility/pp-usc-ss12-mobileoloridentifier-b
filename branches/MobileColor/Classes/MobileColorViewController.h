@@ -29,6 +29,10 @@
 - (void)updateLabelsFromTouches:(NSSet *)touches;
 - (IBAction)getCameraPicture:(id)sender;
 - (IBAction)selectExistingPicture;
+
+- (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage;
+- (UIColor*) getPixelColorAtLocation:(CGPoint)point;
+
 @end
 
 
