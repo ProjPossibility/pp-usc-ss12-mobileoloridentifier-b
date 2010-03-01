@@ -14,6 +14,34 @@
 -(id) init{
 	if(self = [super init] )
 	{
+		/*dictionary=[[NSDictionary dictionaryWithObjectsAndKeys:
+					 @"Black",@"000000", 
+					 @"Navy Blue",@"000080", 
+					 @"Dark Blue",@"0000C8", 
+					 @"Blue",@"0000FF",
+					 @"Green",@"00FF00", 
+					 @"Spring Green",@"00FF7F", 
+					 @"Aqua / Cyan",@"00FFFF",
+					 @"Yellow Orange",@"FFAE42",
+					 @"Yellow Green",@"C5E17A", 
+					 @"Brick Red",@"C62D42", 
+					 @"Yellow",@"FFFF00",
+					 @"Red",@"FF0000", 
+					 @"Rose",@"FF007F",
+					 @"Fuchsia / Magenta",@"FF00FF", 
+					 @"Wild Strawberry",@"FF3399", 
+					 @"Red Orange",@"FF3F34",
+					 @"Bright Red",@"B10000",
+					 @"Brown",@"964B00",
+					 @"Hot Pink",@"FF69B4",
+					 @"Peach",@"FFE5B4", 
+					 @"Egg White",@"FFEFC1",
+					 @"Fair Pink",@"FFEFEC",
+					 @"Bright Gray",@"3C4151",
+					 @"Steel Gray",@"262335",  
+					 @"White",@"FFFFFF", nil]retain];
+	}*/
+	
 		dictionary=[[NSDictionary dictionaryWithObjectsAndKeys:
 					 @"Black",@"000000", 
 					 @"Navy Blue",@"000080", 

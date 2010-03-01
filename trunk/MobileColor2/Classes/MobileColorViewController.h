@@ -28,6 +28,8 @@
 	UIToolbar *toolBar;
 	NSArray *items;
 	IBOutlet UILabel *loadingCameraLabel;
+	NSObject *v;
+	NSString *currentName_;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
@@ -36,6 +38,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *messageLabel;
 @property (nonatomic, retain) IBOutlet UILabel *tapsLabel;
 @property (nonatomic, retain) IBOutlet UILabel *touchesLabel;
+@property (nonatomic, copy) NSString *currentName;
 
 - (void)updateLabelsFromTouches:(NSSet *)touches;
 - (IBAction)getCameraPicture; //:(id)sender;

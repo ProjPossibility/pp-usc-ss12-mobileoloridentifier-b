@@ -18,7 +18,7 @@
 @synthesize messageLabel;
 @synthesize tapsLabel;
 @synthesize touchesLabel;
-
+@synthesize currentName;
 
 
 typedef struct {
@@ -64,9 +64,9 @@ typedef struct {
 	
 	/* You'll need to link to VoiceServices.framework in PrivateFrameworks */
 	
-	NSObject *v = [[NSClassFromString(@"VSSpeechSynthesizer") alloc] init]; // I'm lazy
-	NSLog(@"%@", v);
-	[v startSpeakingString:@"All your base are belong to us"];
+	
+	//NSLog(@"%@", v);
+	
 	
 //	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //	button.frame = CGRectMake(20,400,280,50);
@@ -118,7 +118,7 @@ typedef struct {
 	[self presentModalViewController:picker animated:YES];		
 	[picker release];
 	// start our processing timer
-	processingTimer=[NSTimer scheduledTimerWithTimeInterval:1/5.0f target:self selector:@selector(processImage) userInfo:nil repeats:YES];
+	processingTimer=[NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(processImage) userInfo:nil repeats:YES];
 }
 
 - (IBAction)selectExistingPicture {
@@ -182,6 +182,8 @@ typedef struct {
 	[super viewDidLoad];
 	
 	colorModel = [[ColorModel alloc] init];
+	
+	v = [[NSClassFromString(@"VSSpeechSynthesizer") alloc] init]; // I'm lazy
 	
 	// tool bar - handy if you want to be able to exit from the image picker...
 	//UIToolbar *
@@ -379,18 +381,42 @@ CGImageRef UIGetScreenImage();
 	
 	// Now we can get a pointer to the image data associated with the bitmap
 	// context.
+	int red,green,blue,alpha;
 	unsigned char* data = CGBitmapContextGetData (cgctx);
 	if (data != NULL) {
 		//offset locates the pixel in the data from x,y.
 		//4 for 4 bytes of data per pixel, w is width of one row of data.
-		int offset = 4*((w*round(point.y))+round(point.x));
-		int alpha =  data[offset];
-		int red = data[offset+1];
-		int green = data[offset+2];
-		int blue = data[offset+3];
-//		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
+		red=0;
+		green = 0;
+		blue =0;
+		alpha = 0;
+		
+		for(int i =-9;i<9;i++)
+		{
+			for(int j =-9;j<9;j++)
+			{
+				int offset = 4*(((w-i)*round(point.y))+round(point.x));
+				alpha +=  data[offset];
+				red += data[offset+1];
+				green += data[offset+2];
+				blue += data[offset+3];
+			}
+		}
+						
+		red = red/324;
+		blue = blue/324;
+		green = green/324;
+		alpha = alpha/324;
+
+		//		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
 		color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
-		[overlayView showText:[colorModel nameForColorGivenRed:red Green:green Blue:blue]]; //[NSString stringWithFormat:@"RGB %i %i %i",red,green,blue]];
+		NSString *colorName = [colorModel nameForColorGivenRed:red Green:green Blue:blue];
+		[overlayView showText:colorName]; //[NSString stringWithFormat:@"RGB %i %i %i",red,green,blue]];
+		
+		if (![colorName isEqualToString:self.currentName]) {
+			self.currentName = colorName;
+			[v startSpeakingString:colorName];
+		}
 //		NSLog(@"%@", [NSString stringWithFormat:@"%@", color]);
 	}
 	
