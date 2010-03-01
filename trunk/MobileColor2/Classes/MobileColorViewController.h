@@ -24,7 +24,12 @@
 	CGPoint temp;
 	OverlayView *overlayView;
 	ColorModel *colorModel;
+	UIView *parentView;
+	UIToolbar *toolBar;
+	NSArray *items;
+	IBOutlet UILabel *loadingCameraLabel;
 }
+
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UIButton *takePictureButton;
 @property (nonatomic, retain) IBOutlet UIButton *selectFromCameraRollButton;
@@ -33,7 +38,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *touchesLabel;
 
 - (void)updateLabelsFromTouches:(NSSet *)touches;
-- (IBAction)getCameraPicture:(id)sender;
+- (IBAction)getCameraPicture; //:(id)sender;
 - (IBAction)selectExistingPicture;
 @end
 

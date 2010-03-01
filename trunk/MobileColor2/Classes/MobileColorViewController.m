@@ -47,10 +47,10 @@ typedef struct {
 -(void) finishedAugmentedReality {
 	[self dismissModalViewControllerAnimated:YES];
 	[processingTimer invalidate];
-	overlayView=nil;
+	//overlayView=nil;
 }
 
-- (IBAction)getCameraPicture:(id)sender {
+- (IBAction)getCameraPicture { //:(id)sender {
 	// set up our camera overlay view
 	
 	if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
@@ -60,7 +60,13 @@ typedef struct {
 //        selectFromCameraRollButton.hidden = YES;
     }
 	
-	NSLog(@"getCameraPicture:");
+	//NSLog(@"getCameraPicture");
+	
+	/* You'll need to link to VoiceServices.framework in PrivateFrameworks */
+	
+	NSObject *v = [[NSClassFromString(@"VSSpeechSynthesizer") alloc] init]; // I'm lazy
+	NSLog(@"%@", v);
+	[v startSpeakingString:@"All your base are belong to us"];
 	
 //	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //	button.frame = CGRectMake(20,400,280,50);
@@ -69,19 +75,7 @@ typedef struct {
 //	[button addTarget:self action:@selector(selectExistingPicture) forControlEvents:UIControlEventTouchUpInside];
 //	[self.view addSubview:button];
 	
-	// tool bar - handy if you want to be able to exit from the image picker...
-	UIToolbar *toolBar=[[[UIToolbar alloc] initWithFrame:CGRectMake(0, 480-44, 320, 44)] autorelease];
-	NSArray *items=[NSArray arrayWithObjects:
-					[[[UIBarButtonItem alloc] initWithTitle:@"Albums" style:UIBarButtonItemStyleBordered target:self action:@selector(selectExistingPicture)] autorelease],
-					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace  target:nil action:nil] autorelease],
-					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone  target:self action:@selector(finishedAugmentedReality)] autorelease],
-					nil];
-	[toolBar setItems:items];
-	
-	// parent view for our overlay
-	UIView *parentView=[[[UIView alloc] initWithFrame:CGRectMake(0,0,320, 480)] autorelease];
-	[parentView addSubview:overlayView];
-	[parentView addSubview:toolBar];
+	[toolBar setItems:items animated:NO];
 	
 	// configure the image picker with our overlay view
 	UIImagePickerController *picker=[[UIImagePickerController alloc] init];
@@ -128,18 +122,22 @@ typedef struct {
 }
 
 - (IBAction)selectExistingPicture {
-	if ([self modalViewController]) {
-		//[self finishedAugmentedReality];
-		[self dismissModalViewControllerAnimated:NO];
-		[processingTimer invalidate];
-		overlayView=nil;
-	}
+	
+	
 	
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary]) {
+		if ([self modalViewController]) {
+			//[self finishedAugmentedReality];
+			[self dismissModalViewControllerAnimated:NO];
+			[processingTimer invalidate];
+			//overlayView=nil;
+		}
+		loadingCameraLabel.hidden = YES;
+		
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         //picker.allowsImageEditing = YES;
-		picker.allowsEditing = NO;
+		picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentModalViewController:picker animated:YES];
         [picker release];
@@ -164,13 +162,19 @@ typedef struct {
     //imageView
 	imageView.image = image;
     [picker dismissModalViewControllerAnimated:YES];
-    
+	
+	[self.view addSubview:parentView];
+	
+	NSMutableArray *itemsAndCameraButton = [[items mutableCopy] autorelease];
+	[itemsAndCameraButton addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(getCameraPicture)] autorelease]];
+	[toolBar setItems:itemsAndCameraButton animated:NO];
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissModalViewControllerAnimated:NO];
 	
-	[self getCameraPicture:nil];
+	[self getCameraPicture];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -179,15 +183,36 @@ typedef struct {
 	
 	colorModel = [[ColorModel alloc] init];
 	
+	// tool bar - handy if you want to be able to exit from the image picker...
+	//UIToolbar *
+	toolBar=[[[UIToolbar alloc] initWithFrame:CGRectMake(0, 480-44, 320, 44)] autorelease];
+	//NSArray *
+	items=[[NSArray arrayWithObjects:
+					[[[UIBarButtonItem alloc] initWithTitle:@"Albums" style:UIBarButtonItemStyleBordered target:self action:@selector(selectExistingPicture)] autorelease],
+					[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace  target:nil action:nil] autorelease],
+					//[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone  target:self action:@selector(finishedAugmentedReality)] autorelease],
+					nil] retain];
+	//[toolBar setItems:items];
+	
 	// create the overlay view
 	overlayView=[[OverlayView alloc] initWithFrame:CGRectMake(0, 0, 320, 480-44)]; // autorelease];
 	// important - it needs to be transparent so the camera preview shows through!
 	overlayView.opaque=NO;
 	overlayView.backgroundColor=[UIColor clearColor];
 	
+	
+	
+	// parent view for our overlay
+	parentView=[[UIView alloc] initWithFrame:CGRectMake(0,0,320, 480)]; // autorelease];
+	[parentView addSubview:overlayView];
+	[parentView addSubview:toolBar];
+	
+	
+	
+	
 	// start camera
-	[self performSelector:@selector(getCameraPicture:) withObject:nil afterDelay:0.0f];
-	//[self getCameraPicture:nil];
+	[self performSelector:@selector(getCameraPicture) withObject:nil afterDelay:0.0f];
+	//[self getCameraPicture];
 	
 	
 	
@@ -363,10 +388,10 @@ CGImageRef UIGetScreenImage();
 		int red = data[offset+1];
 		int green = data[offset+2];
 		int blue = data[offset+3];
-		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
+//		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
 		color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
 		[overlayView showText:[colorModel nameForColorGivenRed:red Green:green Blue:blue]]; //[NSString stringWithFormat:@"RGB %i %i %i",red,green,blue]];
-		NSLog(@"%@", [NSString stringWithFormat:@"%@", color]);
+//		NSLog(@"%@", [NSString stringWithFormat:@"%@", color]);
 	}
 	
 	// When finished, release the context
