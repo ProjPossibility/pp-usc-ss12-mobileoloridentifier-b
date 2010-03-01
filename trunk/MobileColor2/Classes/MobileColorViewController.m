@@ -137,7 +137,7 @@ typedef struct {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         //picker.allowsImageEditing = NO;
-		picker.allowsEditing = NO;
+		picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentModalViewController:picker animated:YES];
         [picker release];
