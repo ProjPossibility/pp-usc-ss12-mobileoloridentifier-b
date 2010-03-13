@@ -412,6 +412,7 @@ CGImageRef UIGetScreenImage();
 		color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
 		NSString *colorName = [colorModel nameForColorGivenRed:red Green:green Blue:blue];
 		[overlayView showText:colorName]; //[NSString stringWithFormat:@"RGB %i %i %i",red,green,blue]];
+		[overlayView setColor:color];
 		
 		if (![colorName isEqualToString:self.currentName]) {
 			self.currentName = colorName;

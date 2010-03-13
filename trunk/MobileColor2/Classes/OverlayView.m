@@ -21,19 +21,24 @@
 		blackView.alpha = 0.5f;
 		[self addSubview:blackView];
 		
-		label = [[UILabel alloc] initWithFrame:CGRectMake(10, 260, 300, 50)];
+		label = [[UILabel alloc] initWithFrame:CGRectMake(10+50+10, 260, 300-50-10, 50)];
 		label.backgroundColor = [UIColor clearColor]; //[UIColor blackColor];
 		label.textColor = [UIColor whiteColor];
 		label.textAlignment = UITextAlignmentCenter;
 		[self addSubview:label];
 		
-		
+		colorView = [[UIView alloc] initWithFrame:CGRectMake(10, 260, 50, 50)];
+		[self addSubview:colorView];
     }
     return self;
 }
 
 - (void)showText:(NSString *)text {
 	label.text = text;
+}
+
+- (void)setColor:(UIColor *)color {
+	colorView.backgroundColor = color;
 }
 
 /*

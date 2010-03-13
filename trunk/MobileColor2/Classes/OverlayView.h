@@ -11,8 +11,10 @@
 
 @interface OverlayView : UIView {
 	UILabel *label;
+	UIView *colorView;
 }
 
 - (void)showText:(NSString *)text;
+- (void)setColor:(UIColor *)color;
 
 @end

@@ -9,12 +9,15 @@
 #import "ColorModel.h"
 #include <math.h>
 
+#define SMALL_DICTIONARY 0
+
 @implementation ColorModel
 
 -(id) init{
 	if(self = [super init] )
 	{
-		/*dictionary=[[NSDictionary dictionaryWithObjectsAndKeys:
+#if SMALL_DICTIONARY
+		dictionary=[[NSDictionary dictionaryWithObjectsAndKeys:
 					 @"Black",@"000000", 
 					 @"Navy Blue",@"000080", 
 					 @"Dark Blue",@"0000C8", 
@@ -40,7 +43,7 @@
 					 @"Bright Gray",@"3C4151",
 					 @"Steel Gray",@"262335",  
 					 @"White",@"FFFFFF", nil]retain];
-	}*/
+#else
 	
 		dictionary=[[NSDictionary dictionaryWithObjectsAndKeys:
 					 @"Black",@"000000", 
@@ -1610,6 +1613,7 @@
 					 @"Portafino",@"FFFFB4", 
 					 @"Ivory",@"FFFFF0",
 					 @"White",@"FFFFFF", nil]retain];
+#endif
 	}
 	
 	
